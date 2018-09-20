@@ -1,0 +1,15 @@
+//Problem Link - Array Rotation: https://ibm.biz/BdYK8z
+//Run time O(n)
+
+vector<int> rotLeft(vector<int> a, int d) {
+    //if no rotation is required
+    if(d==0) return a; 
+    //else create vector to rotate   
+    vector<int> v;
+    int n = a.size();
+    for(int i=0;i<n;i++){
+        v.push_back(a[(i+d)%n]);
+    }
+    return v;
+}
+

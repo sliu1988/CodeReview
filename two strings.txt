@@ -1,0 +1,20 @@
+//Problem Link-Two Strings: https://ibm.biz/BdYK8y
+//Run time O(n)
+
+//using hashmap to store one string and use another to find subset
+string twoStrings(string s1, string s2) {
+    map<char,int> m;
+    int i,j=0;
+    while(i<s1.size()){
+        char c = s1[i];
+        m.insert(pair<char,int>(c,i));
+        i++;
+    }
+    while(j<s2.size()){
+        if (m.find(s2[j])!=m.end()){
+            return "YES";
+        } 
+        j++;
+    }    
+    return "NO";
+}
