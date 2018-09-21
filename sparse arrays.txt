@@ -1,6 +1,6 @@
 //Problem Link-Sparse Arrays: https://ibm.biz/BdYK8f
-//Run time O(n^2)
 
+//Version 1 Run time O(n^2)
 //use nested for-loops to find queries in strings
 vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
     int m=strings.size();
@@ -16,7 +16,41 @@ vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
     return v;
 }
 
+//Version 2 Run Time O(n)
+//use one hashmap to store the queries and the count; search through strings to find queries and increment count if found; output the result from hashmap to vector<int>
 
+vector<int> matchingStrings(vector<string> strings, vector<string> queries) {
+    int k=strings.size();
+    int n=queries.size();
+    map<string,int> m;
+    vector<int> v(n,0);
+    int i,j,l=0;
+    map<string,int>::iterator it=m.find(queries[i]);    
+    //initialize all counts in hashmap to zero
+    while(i<n){           
+        if(it==m.end()){
+            m.insert(pair<string,int>(queries[i],0));       
+        }        
+        i++;
+    }        
+    //update hashmap (how many instances in there, update the hashmap)
+    while(j<k){
+        it=m.find(strings[j]);
+        if(it!=m.end()){
+            it->second++;
+        }
+        j++;
+    }
+    //one more loop to check through the hashmap of queries to return the v
+    while(l<n){
+        it=m.find(queries[l]);
+        if(it!=m.end()){
+            v[l]=it->second;
+        }
+        l++;
+    }    
+    return v;
+}
 
 
 
